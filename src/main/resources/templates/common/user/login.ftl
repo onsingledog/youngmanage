@@ -4,11 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <title>用户登录</title>
-    <link rel="stylesheet" href="/layui/css/layui.css" >
+    <link rel="stylesheet" href="/file/layui/css/layui.css" >
 </head>
 
-<body >
+<script type="javascript" >
 
+</script>
+
+<body >
 
 <div class="layui-container fly-marginTop">
     <div class="fly-panel fly-panel-user" pad20="">
@@ -20,7 +23,7 @@
             <div class="layui-form layui-tab-content" id="LAY_ucm" style="padding: 20px 0;">
                 <div class="layui-tab-item layui-show">
                     <div class="layui-form layui-form-pane" >
-                        <form method="post" style="text-align: center">
+                        <form method="post"  >
                             <div class="layui-form-item">
                                 <label for="L_email" class="layui-form-label">用户名</label>
                                 <div class="layui-input-inline">

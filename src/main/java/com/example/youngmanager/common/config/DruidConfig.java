@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
+ * 配置启动druid控制台
  * Created by Administrator on 2018/6/4.
  */
 @Configuration

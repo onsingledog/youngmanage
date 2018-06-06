@@ -1,5 +1,6 @@
 package com.example.youngmanager.common.entity;
 
+
 public class User {
     private String id;
 

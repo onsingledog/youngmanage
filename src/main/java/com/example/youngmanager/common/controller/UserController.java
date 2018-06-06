@@ -1,10 +1,14 @@
 package com.example.youngmanager.common.controller;
 
+import com.example.youngmanager.common.entity.ResParams;
 import com.example.youngmanager.common.entity.User;
 import com.example.youngmanager.common.service.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -19,6 +23,8 @@ public class UserController {
 
     private String BASE = "/common/user";
 
+    private Logger logger = LoggerFactory.getLogger(UserController.class);
+
     @Autowired
     private UserService userService;
 
@@ -30,8 +36,29 @@ public class UserController {
 
     @GetMapping("/login")
     public String login(){
-
         return BASE + "/login";
+    }
+
+
+    /**
+     * 用户请求登录方法
+     * @param username
+     * @param password
+     * @return
+     */
+    @PostMapping("/ajaxLogin")
+    public ResParams login(String username,String password){
+
+        ResParams r;
+        try{
+
+            r = new ResParams("1","登录成功");
+        }catch (Exception e){
+            e.printStackTrace();
+            r = new ResParams("-1","登录失败");
+        }
+
+        return r;
     }
 
 }
