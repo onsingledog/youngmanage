@@ -1,7 +1,7 @@
 package com.example.youngmanager.common.mapper;
 
-
 import com.example.youngmanager.common.entity.User;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -9,7 +9,7 @@ import java.util.List;
 @Repository
 public interface UserMapper {
 
-    List<User> getUsers(User user);
+    List<User> getLoginUser(@Param("username") String username,@Param("paeeword") String password);
 
     int deleteByPrimaryKey(String id);
 

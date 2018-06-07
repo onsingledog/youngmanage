@@ -39,8 +39,9 @@ public class ShiroConfig {
         Map<String,String> filterChainDefinitionMap = new LinkedHashMap<>();
         filterChainDefinitionMap.put("/file/**","anon");//静态文件不过滤
         filterChainDefinitionMap.put("/druid/**","anon");
-        filterChainDefinitionMap.put("/ajaxLogin","anon");
-        filterChainDefinitionMap.put("/logout","logout");
+        filterChainDefinitionMap.put("/user/ajaxLogin","anon");
+        filterChainDefinitionMap.put("/user/register","anon");
+        filterChainDefinitionMap.put("/user/logout","logout");
         filterChainDefinitionMap.put("/add", "perms[权限添加]");
         filterChainDefinitionMap.put("/**", "authc");
 
