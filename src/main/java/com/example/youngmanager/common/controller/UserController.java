@@ -65,6 +65,7 @@ public class UserController {
      * @param user
      * @return
      */
+    @ResponseBody
     @PostMapping("/register")
     public ResParams register(User user){
         try{
