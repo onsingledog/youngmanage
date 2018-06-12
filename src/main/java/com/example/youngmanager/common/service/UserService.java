@@ -6,10 +6,7 @@ import com.sun.org.apache.bcel.internal.generic.RETURN;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 
 /**
  * Created by Administrator on 2018/6/4.
@@ -19,6 +16,15 @@ public class UserService {
 
     @Autowired
     private UserMapper userMapper;
+
+    /**
+     * 用户注册
+     * @param user
+     */
+    public void register(User user){
+        user.setId(UUID.randomUUID().toString().replaceAll("-",""));
+        userMapper.insert(user);
+    }
 
     /**
      * 获取用户的权限码集合

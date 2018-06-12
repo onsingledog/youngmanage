@@ -3,17 +3,21 @@ package com.example.youngmanager.common.controller;
 import com.example.youngmanager.common.entity.ResParams;
 import com.example.youngmanager.common.entity.User;
 import com.example.youngmanager.common.service.UserService;
+import com.example.youngmanager.common.util.Constants;
+import com.example.youngmanager.common.util.IpUtil;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.crypto.hash.Md2Hash;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+import sun.security.provider.MD5;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.xml.crypto.Data;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -67,8 +71,22 @@ public class UserController {
      */
     @ResponseBody
     @PostMapping("/register")
-    public ResParams register(User user){
+    public ResParams register(User user, @RequestParam("password2") String password2, HttpServletRequest request){
         try{
+            if(user.getPassword() != password2)
+                return new ResParams("-1","两次输入密码不一致");
+
+            Date d = new Date();
+            user.setState(Constants.ENABLE);
+            user.setCreateDate(d);
+            user.setLastUpdateDate(d);
+            user.setLastLoginDate(d);
+            user.setLastLoginIp(IpUtil.getIpAddr(request));
+            user.setComment("普通注册用户");
+            user.setPassword();
+            userService.register(user);
+            UsernamePasswordToken token = new UsernamePasswordToken(user.getTelephone(),user.getPassword());
+
 
         }catch (Exception e){
             return new ResParams("-1","注册失败");

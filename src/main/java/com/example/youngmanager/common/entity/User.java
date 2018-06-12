@@ -5,11 +5,12 @@ import com.example.youngmanager.common.util.Constants;
 import java.util.Date;
 
 public class User {
+
     private String id;
 
-    private String username;
+    private String username;//用户姓名
 
-    private String nickname;
+    private String nickname;//用户昵称
 
     private String password;
 
