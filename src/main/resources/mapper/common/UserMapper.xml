@@ -30,7 +30,7 @@
 
   <select id="getLoginUser" resultMap="BaseResultMap" >
       SELECT * FROM base_user u
-      WHERE (u.username=#{username} OR u.telephone=#{username} OR u.mail=#{username} )
+      WHERE (u.username=#{loginname} OR u.telephone=#{loginname} OR u.mail=#{loginname} )
       AND u.password=#{password}
   </select>
 

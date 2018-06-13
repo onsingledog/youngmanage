@@ -9,7 +9,13 @@ import java.util.List;
 @Repository
 public interface UserMapper {
 
-    List<User> getLoginUser(@Param("username") String username,@Param("paeeword") String password);
+    /**
+     * 获取登录的用户
+     * @param loginname
+     * @param password
+     * @return
+     */
+    List<User> getLoginUser(@Param("loginname") String loginname,@Param("password") String password);
 
     int deleteByPrimaryKey(String id);
 

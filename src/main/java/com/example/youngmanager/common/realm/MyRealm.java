@@ -54,10 +54,10 @@ public class MyRealm extends AuthorizingRealm {
         if(users==null || users.size()==0)
             throw new AccountException("用户名或密码错误");
         User user = users.get(0);
-        if(user.userState())
+        if(!user.userState())
             throw new DisabledAccountException("用户状态为禁止登录状态");
         CommonUtil.setSession("_User",user);
-        return new  SimpleAuthenticationInfo(user, username, password);
+        return new  SimpleAuthenticationInfo(user, password,username);
     }
 
 }

@@ -3,6 +3,7 @@ package com.example.youngmanager.common.service;
 import com.example.youngmanager.common.entity.User;
 import com.example.youngmanager.common.mapper.UserMapper;
 import com.sun.org.apache.bcel.internal.generic.RETURN;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -50,12 +51,12 @@ public class UserService {
 
     /**
      * 获取登录的用户
-     * @param username
+     * @param loginname
      * @param password
      * @return
      */
-    public List<User> getLoginUsers(String username,String password){
-        return userMapper.getLoginUser(username,password);
+    public List<User> getLoginUsers(String loginname, String password){
+        return userMapper.getLoginUser(loginname,password);
     }
 
     public List<User> getUsers(User user){
