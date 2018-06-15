@@ -1,28 +1,27 @@
 package com.example.youngmanager.common.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.example.youngmanager.common.entity.ResParams;
 import com.example.youngmanager.common.entity.User;
 import com.example.youngmanager.common.service.UserService;
+import com.example.youngmanager.common.util.CommonUtil;
 import com.example.youngmanager.common.util.Constants;
 import com.example.youngmanager.common.util.IpUtil;
 import com.example.youngmanager.common.util.Md5Util;
+import jodd.json.JsonSerializer;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.ShiroException;
-import org.apache.shiro.authc.AccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
-import org.apache.shiro.crypto.hash.Md2Hash;
-import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import sun.security.provider.MD5;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.xml.crypto.Data;
 import java.util.Date;
 import java.util.List;
 
@@ -51,7 +50,9 @@ public class UserController {
      * @return
      */
     @GetMapping("/main")
-    public String toMain(){
+    public String toMain(Model model){
+        User user = (User) CommonUtil.getSession("_User");
+        model.addAttribute("menuData", JSONObject.toJSONString(userService.getUserMenuData(user.getId())));
         return BASE + "/main";
     }
 

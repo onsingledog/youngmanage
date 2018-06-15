@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.youngmanager.common.mapper.MenuMapper">
+  <resultMap id="BaseResultMap" type="com.example.youngmanager.common.entity.Menu">
+    <id column="menu_id" jdbcType="VARCHAR" property="menuId" />
+    <result column="menu_title" jdbcType="VARCHAR" property="menuTitle" />
+    <result column="menu_icon_class" jdbcType="VARCHAR" property="menuIconClass" />
+    <result column="menu_icon_url" jdbcType="VARCHAR" property="menuIconUrl" />
+    <result column="menu_url" jdbcType="VARCHAR" property="menuUrl" />
+    <result column="menu_sort" jdbcType="INTEGER" property="menuSort" />
+    <result column="menu_level" jdbcType="VARCHAR" property="menuLevel" />
+    <result column="menu_parent_id" jdbcType="VARCHAR" property="menuParentId" />
+    <result column="menu_state" jdbcType="VARCHAR" property="menuState" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="last_update_by" jdbcType="VARCHAR" property="lastUpdateBy" />
+    <result column="last_update_date" jdbcType="TIMESTAMP" property="lastUpdateDate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    menu_id, menu_title, menu_icon_class, menu_icon_url, menu_url, menu_sort, menu_level, 
+    menu_parent_id, menu_state, create_by, create_date, last_update_by, last_update_date
+  </sql>
+
+
+  <!--获取菜单信息-->
+  <select id="getUserMenuData" parameterType="Map" resultMap="BaseResultMap">
+    SELECT
+        m.menu_id,
+        m.menu_icon_class,
+        m.menu_level,
+        m.menu_title,
+        m.menu_parent_id,
+        m.menu_url
+    FROM base_menu m
+    LEFT JOIN base_role_menu rm ON m.menu_id=rm.menu_id
+    LEFT JOIN base_user_role ur ON rm.role_id=ur.role_id
+    where m.menu_level=#{menuLevel}
+    and ur.user_id=#{userId}
+    order by m.menu_sort
+  </select>
+
+
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from base_menu
+    where menu_id = #{menuId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from base_menu
+    where menu_id = #{menuId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.example.youngmanager.common.entity.Menu">
+    insert into base_menu (menu_id, menu_title, menu_icon_class, 
+      menu_icon_url, menu_url, menu_sort, 
+      menu_level, menu_parent_id, menu_state, 
+      create_by, create_date, last_update_by, 
+      last_update_date)
+    values (#{menuId,jdbcType=VARCHAR}, #{menuTitle,jdbcType=VARCHAR}, #{menuIconClass,jdbcType=VARCHAR}, 
+      #{menuIconUrl,jdbcType=VARCHAR}, #{menuUrl,jdbcType=VARCHAR}, #{menuSort,jdbcType=INTEGER}, 
+      #{menuLevel,jdbcType=VARCHAR}, #{menuParentId,jdbcType=VARCHAR}, #{menuState,jdbcType=VARCHAR}, 
+      #{createBy,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{lastUpdateBy,jdbcType=VARCHAR}, 
+      #{lastUpdateDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.youngmanager.common.entity.Menu">
+    insert into base_menu
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="menuId != null">
+        menu_id,
+      </if>
+      <if test="menuTitle != null">
+        menu_title,
+      </if>
+      <if test="menuIconClass != null">
+        menu_icon_class,
+      </if>
+      <if test="menuIconUrl != null">
+        menu_icon_url,
+      </if>
+      <if test="menuUrl != null">
+        menu_url,
+      </if>
+      <if test="menuSort != null">
+        menu_sort,
+      </if>
+      <if test="menuLevel != null">
+        menu_level,
+      </if>
+      <if test="menuParentId != null">
+        menu_parent_id,
+      </if>
+      <if test="menuState != null">
+        menu_state,
+      </if>
+      <if test="createBy != null">
+        create_by,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="lastUpdateBy != null">
+        last_update_by,
+      </if>
+      <if test="lastUpdateDate != null">
+        last_update_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="menuId != null">
+        #{menuId,jdbcType=VARCHAR},
+      </if>
+      <if test="menuTitle != null">
+        #{menuTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="menuIconClass != null">
+        #{menuIconClass,jdbcType=VARCHAR},
+      </if>
+      <if test="menuIconUrl != null">
+        #{menuIconUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="menuUrl != null">
+        #{menuUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="menuSort != null">
+        #{menuSort,jdbcType=INTEGER},
+      </if>
+      <if test="menuLevel != null">
+        #{menuLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="menuParentId != null">
+        #{menuParentId,jdbcType=VARCHAR},
+      </if>
+      <if test="menuState != null">
+        #{menuState,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdateBy != null">
+        #{lastUpdateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdateDate != null">
+        #{lastUpdateDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.youngmanager.common.entity.Menu">
+    update base_menu
+    <set>
+      <if test="menuTitle != null">
+        menu_title = #{menuTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="menuIconClass != null">
+        menu_icon_class = #{menuIconClass,jdbcType=VARCHAR},
+      </if>
+      <if test="menuIconUrl != null">
+        menu_icon_url = #{menuIconUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="menuUrl != null">
+        menu_url = #{menuUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="menuSort != null">
+        menu_sort = #{menuSort,jdbcType=INTEGER},
+      </if>
+      <if test="menuLevel != null">
+        menu_level = #{menuLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="menuParentId != null">
+        menu_parent_id = #{menuParentId,jdbcType=VARCHAR},
+      </if>
+      <if test="menuState != null">
+        menu_state = #{menuState,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null">
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdateBy != null">
+        last_update_by = #{lastUpdateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdateDate != null">
+        last_update_date = #{lastUpdateDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where menu_id = #{menuId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.youngmanager.common.entity.Menu">
+    update base_menu
+    set menu_title = #{menuTitle,jdbcType=VARCHAR},
+      menu_icon_class = #{menuIconClass,jdbcType=VARCHAR},
+      menu_icon_url = #{menuIconUrl,jdbcType=VARCHAR},
+      menu_url = #{menuUrl,jdbcType=VARCHAR},
+      menu_sort = #{menuSort,jdbcType=INTEGER},
+      menu_level = #{menuLevel,jdbcType=VARCHAR},
+      menu_parent_id = #{menuParentId,jdbcType=VARCHAR},
+      menu_state = #{menuState,jdbcType=VARCHAR},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      last_update_by = #{lastUpdateBy,jdbcType=VARCHAR},
+      last_update_date = #{lastUpdateDate,jdbcType=TIMESTAMP}
+    where menu_id = #{menuId,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -9,6 +9,8 @@ import org.apache.shiro.subject.Subject;
  */
 public class CommonUtil {
 
+
+
     /**
      * ShiroSession设置
      * 使用时直接用HttpSession.getAttribute(key)就可以取到
