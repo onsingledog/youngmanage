@@ -8,7 +8,6 @@ import com.example.youngmanager.common.util.CommonUtil;
 import com.example.youngmanager.common.util.Constants;
 import com.example.youngmanager.common.util.IpUtil;
 import com.example.youngmanager.common.util.Md5Util;
-import jodd.json.JsonSerializer;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.ShiroException;
@@ -53,7 +52,7 @@ public class UserController {
     public String toMain(Model model){
         User user = (User) CommonUtil.getSession("_User");
         model.addAttribute("menuData", JSONObject.toJSONString(userService.getUserMenuData(user.getId())));
-        return BASE + "/main";
+        return "/common/main/main";
     }
 
     /**

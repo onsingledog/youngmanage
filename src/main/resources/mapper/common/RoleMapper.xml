@@ -15,6 +15,22 @@
     id, role_code, role_name, create_by, create_date, last_update_by, last_update_date, 
     comment
   </sql>
+
+
+  <select id="getRoles" parameterType="com.example.youngmanager.common.entity.Role" resultMap="BaseResultMap" >
+    select * from base_role
+    <where>
+      <if test="roleCode != null and roleCode != '' " >
+        and role_code = #{roleCode}
+      </if>
+      <if test="roleName != null and roleName != '' " >
+        and role_name = #{roleName}
+      </if>
+    </where>
+    order by create_date desc
+  </select>
+
+
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

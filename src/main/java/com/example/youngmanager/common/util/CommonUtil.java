@@ -4,12 +4,18 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 
+import java.util.UUID;
+
 /**
  * Created by Administrator on 2018/6/7.
  */
 public class CommonUtil {
 
 
+    public static String getUuid(){
+
+        return UUID.randomUUID().toString().replace("-","");
+    }
 
     /**
      * ShiroSession设置

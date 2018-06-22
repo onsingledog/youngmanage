@@ -1,3 +1,70 @@
+
+function navBar(strData){
+    var data;
+    if(typeof(strData) == "string"){
+        var data = JSON.parse(strData); //部分用户解析出来的是字符串，转换一下
+    }else{
+        data = strData;
+    }
+    var ulHtml = '<ul class="layui-nav layui-nav-tree">';
+    for(var i=0;i<data.length;i++){
+        if(data[i].spread){
+            ulHtml += '<li class="layui-nav-item layui-nav-itemed">';
+        }else{
+            ulHtml += '<li class="layui-nav-item">';
+        }
+        if(data[i].childMenus != undefined && data[i].childMenus.length > 0){
+            ulHtml += '<a href="javascript:;">';
+            if(data[i].menuIconClass != undefined && data[i].menuIconClass != ''){
+                if(data[i].menuIconClass.indexOf("icon-") != -1){
+                    ulHtml += '<i class="iconfont '+data[i].menuIconClass+'" data-icon="'+data[i].menuIconClass+'"></i>';
+                }else{
+                    ulHtml += '<i class="layui-icon" data-icon="'+data[i].menuIconClass+'">'+data[i].menuIconClass+'</i>';
+                }
+            }
+            ulHtml += '<cite>'+data[i].menuTitle+'</cite>';
+            ulHtml += '<span class="layui-nav-more"></span>';
+            ulHtml += '</a>';
+            ulHtml += '<dl class="layui-nav-child">';
+            for(var j=0;j<data[i].childMenus.length;j++){
+                var childMenu = data[i].childMenus[j];
+                if(childMenu.target != undefined && childMenu.target == "_blank"){
+                    ulHtml += '<dd><a href="javascript:;" data-id="'+childMenu.menuId+'" data-url="'+childMenu.menuUrl+'" target="'+childMenu.target+'">';
+                }else{
+                    ulHtml += '<dd><a href="javascript:;" data-id="'+childMenu.menuId+'" data-url="'+childMenu.menuUrl+'">';
+                }
+                if(childMenu.menuIconClass != undefined && childMenu.menuIconClass != ''){
+                    if(childMenu.menuIconClass.indexOf("icon-") != -1){
+                        ulHtml += '<i class="iconfont '+childMenu.menuIconClass+'" data-icon="'+childMenu.menuIconClass+'"></i>';
+                    }else{
+                        ulHtml += '<i class="layui-icon" data-icon="'+childMenu.menuIconClass+'">'+childMenu.menuIconClass+'</i>';
+                    }
+                }
+                ulHtml += '<cite>'+childMenu.menuTitle+'</cite></a></dd>';
+            }
+            ulHtml += "</dl>";
+        }else{
+            if(data[i].target != undefined && data[i].target == "_blank"){
+                ulHtml += '<a href="javascript:;" data-id="'+data[i].menuId+'" data-url="'+data[i].menuUrl+'" target="'+data[i].target+'">';
+            }else{
+                ulHtml += '<a href="javascript:;" data-id="'+data[i].menuId+'" data-url="'+data[i].menuUrl+'">';
+            }
+            if(data[i].menuIconClass != undefined && data[i].menuIconClass != ''){
+                if(data[i].menuIconClass.indexOf("icon-") != -1){
+                    ulHtml += '<i class="iconfont '+data[i].menuIconClass+'" data-icon="'+data[i].menuIconClass+'"></i>';
+                }else{
+                    ulHtml += '<i class="layui-icon" data-icon="'+data[i].menuIconClass+'">'+data[i].menuIconClass+'</i>';
+                }
+            }
+            ulHtml += '<cite>'+data[i].menuTitle+'</cite></a>';
+        }
+        ulHtml += '</li>';
+    }
+    ulHtml += '</ul>';
+    return ulHtml;
+}
+
+
 /**
  *
  * @param navs
@@ -55,7 +122,7 @@ layui.use(['jquery','element','layer'], function(){
         , tabChange: function (id) {
             //切换到指定Tab项
             element.tabChange('admin-tab', id); //切换到：用户管理
-            $("iframe[data-frameid='"+id+"']").attr("src",$("iframe[data-frameid='"+id+"']").attr("src"))//切换后刷新框架
+            //$("iframe[data-frameid='"+id+"']").attr("src",$("iframe[data-frameid='"+id+"']").attr("src"))//切换后刷新框架
         }
         , tabDelete: function (id) {
             element.tabDelete("admin-tab", id);//删除
