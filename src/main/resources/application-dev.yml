@@ -1,5 +1,8 @@
 server:
   port: 8080
+  tomcat:
+    max-connections: 10
+    max-threads: 10
 spring:
   druid:
     driver-class-name: com.mysql.jdbc.Driver
@@ -20,13 +23,16 @@ spring:
     filters: stat,wall,slf4j
 mybatis:
   mapper-locations: classpath:mapper/**/*.xml
-  type-aliases-package: com.example.youngmanager.*.mapper.*
-
-
+  type-aliases-package: com.example.youngmanager.*.mapper.*,com.example.youngmanager.*.entity.*
 logging:
   file: c:\youngmanager\log\yonugmanager.log
   level:
     com.example.youngmanager.common.mapper: debug
     com.example.youngmanager.common.controller: debug
+pagehelper:
+  helper-dialect: mysql
+#  support-methods-arguments: true
+#  reasonable: true
+#  row-bounds-with-count: true
 
 
