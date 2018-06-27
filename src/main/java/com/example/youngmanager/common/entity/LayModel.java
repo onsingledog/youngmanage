@@ -27,11 +27,11 @@ public class LayModel<T> {
         this.data = data;
     }
 
-    public LayModel(PageInfo<T> page){
+    public LayModel(PageInfo<T> pageInfo){
         this.code = 0;
         this.msg = "success";
-        this.count = page.getTotal();
-        this.data = page.getList();
+        this.count = pageInfo.getTotal();
+        this.data = pageInfo.getList();
     }
 
 

@@ -74,7 +74,6 @@ public class RoleService {
     }
 
     public LayModel getRoles(Role role,int pageNum,int pageSize){
-
         PageHelper.startPage(pageNum,pageSize);
         List<Role> list = roleMapper.getRoles(role);
         PageInfo<Role> pageInfo = new PageInfo<>(list);

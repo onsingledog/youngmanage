@@ -30,6 +30,12 @@ public class RoleController {
     @Autowired
     private RoleService roleService;
 
+    @GetMapping("/detailRole")
+    public String detailRole(Model model,String id){
+        model.addAttribute("role",roleService.getRoleById(id));
+        return BASE + "/detailRole";
+    }
+
     @PostMapping("/deleteRole")
     @ResponseBody
     public ResParams deleteRole(String id){

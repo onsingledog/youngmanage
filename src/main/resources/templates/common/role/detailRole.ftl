@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>角色管理-修改</title>
+    <title>角色管理-查看</title>
     <link rel="stylesheet" href="/file/layui/css/layui.css">
     <script type="text/javascript" src="/file/js/jquery-1.10.2.min.js" ></script>
     <script type="text/javascript" src="/file/layui/layui.js"></script>
@@ -13,13 +13,11 @@
 
 <blockquote class="layui-elem-quote" >
 <span class="layui-breadcrumb" style="visibility: visible;">
-    <a href="/role/role" >角色管理</a> >
-    <a >角色修改</a>
+    <a >角色查看</a>
 </span>
 </blockquote>
 
 <form class="layui-form layui-form-pane" action="">
-    <input type="hidden" value="${(role.id)!}" name="id" >
     <div class="layui-form-item">
         <label class="layui-form-label">角色编码</label>
         <div class="layui-input-block">
@@ -38,34 +36,10 @@
             <textarea name="comment" placeholder="请输入角色备注内容" class="layui-textarea">${(role.comment)!}</textarea>
         </div>
     </div>
-    <div class="layui-form-item">
-        <div class="layui-input-block">
-            <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
-            <a href="/role/role" class="layui-btn layui-btn-primary" >取消</a>
-        </div>
-    </div>
 </form>
 
 <script>
-    //Demo
-    layui.use(['form','layer'], function(){
-        var form = layui.form, layer = layui.layer;
 
-        //监听提交
-        form.on('submit(formDemo)', function(data){
-            var url = "/role/updateRole";
-            $.post(url,data.field,function (r) {
-                layer.alert(r.msg, function(index){
-                    layer.close(index);
-                    if(r.code == "1"){
-                        window.location.href = "/role/role";
-                    }
-                });
-            });
-//            layer.msg(JSON.stringify(data.field));
-            return false;
-        });
-    });
 </script>
 
 </body>

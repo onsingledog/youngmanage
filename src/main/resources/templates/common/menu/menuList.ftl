@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>角色管理</title>
+    <title>菜单管理</title>
     <link rel="stylesheet" href="/file/layui/css/layui.css">
     <script type="text/javascript" src="/file/js/jquery-1.10.2.min.js" ></script>
     <script type="text/javascript" src="/file/layui/layui.js"></script>
@@ -14,16 +14,13 @@
 
 <blockquote class="layui-elem-quote" >
 <span class="layui-breadcrumb" style="visibility: visible;">
-        <a >角色管理</a>
+        <a >菜单管理</a>
 </span>
 </blockquote>
 <div class="my-btn-box">
     <form id="searchForm" class="layui-form">
         <div class="layui-input-inline">
-            <input type="text" name="roleCode"  autocomplete="off" placeholder="按角色编码查询" class="layui-input" style="width: 120px;">
-        </div>
-        <div class="layui-input-inline">
-            <input type="text" name="roleName"  autocomplete="off" placeholder="按角色名称查询" class="layui-input" style="width: 120px;">
+            <input type="text" name="menuTitle" placeholder="按菜单名称查询" class="layui-input" style="width: 120px;">
         </div>
 
         <button class="layui-btn" id="btn-search" type="button"><i class="layui-icon-search"></i>查询</button>
@@ -58,7 +55,7 @@
 
     $(function(){
         $("#add").click(function(){
-            window.location.href = "/role/addRole";
+            window.location.href = "/menu/addMenu";
         });
     });
 
@@ -66,19 +63,22 @@
         var layer = layui.layer,table=layui.table,laydate = layui.laydate;
         var gridObj = table.render({
             elem: '#dataTable', //指定原始表格元素选择器（推荐id选择器）
-            url:'/role/getRoles',
+            url:'/menu/menuList',
             method: 'post',
             page:true,
             limits:[10,15,20,50,100],
             skin:'row',
             even: true,
+            height: 300,
             where: $("#searchForm").serializeArray(),
             cols:[[
-                {checkbox: true,field: 'id', LAY_CHECKED: false},
-                {field: 'roleCode', title: '角色码',width:200},
-                {field: 'roleName', title: '角色名称',width:200},
-                {field: 'comment', title: '备注',width:350},
-                {fixed: 'right',title: '操作', width:230, align:'center', toolbar: '#barDemo'}
+                {checkbox: true,field: 'menuId', LAY_CHECKED: false},
+                {field: 'menuTitle', title: '菜单名称',width:150},
+                {field: 'menuIconClass', title: '菜单图标',width:150},
+                {field: 'menuUrl', title: '菜单链接',width:200},
+                {field: 'menuSort', title: '菜单序号',width:120},
+                {field: 'menuLevel', title: '菜单级别',width:120},
+                {fixed: 'right',title: '操作', width:220, align:'center', toolbar: '#barDemo'}
             ]]
         });
 

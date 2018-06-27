@@ -11,6 +11,20 @@ import java.util.List;
 public interface MenuMapper {
 
     /**
+     * 获取菜单的总数量
+     * @param menu
+     * @return
+     */
+    int getMenuTotal(Menu menu);
+
+    /**
+     * 获取列表数据
+     * @param menu
+     * @return
+     */
+    List<Menu> getMenuList(Menu menu);
+
+    /**
      * 获取用户对应的菜单信息
      * @param menuLevel
      * @param userId

@@ -31,8 +31,8 @@ logging:
     com.example.youngmanager.common.controller: debug
 pagehelper:
   helper-dialect: mysql
-#  support-methods-arguments: true
-#  reasonable: true
-#  row-bounds-with-count: true
+  support-methods-arguments: true
+  reasonable: true
+  row-bounds-with-count: true
 
 
