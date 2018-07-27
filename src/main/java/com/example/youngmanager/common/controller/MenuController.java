@@ -1,12 +1,9 @@
 package com.example.youngmanager.common.controller;
 
-import com.alibaba.fastjson.JSONObject;
 import com.example.youngmanager.common.entity.LayModel;
 import com.example.youngmanager.common.entity.Menu;
 import com.example.youngmanager.common.entity.ResParams;
 import com.example.youngmanager.common.service.MenuService;
-import com.sun.org.apache.xpath.internal.operations.Mod;
-import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
