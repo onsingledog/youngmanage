@@ -24,6 +24,12 @@ public class MenuController {
     @Autowired
     private MenuService menuService;
 
+
+    /**
+     * 添加菜单功能
+     * @param model
+     * @return
+     */
     @GetMapping("/addMenu")
     public String addMenu(Model model){
         model.addAttribute("oper","add");
